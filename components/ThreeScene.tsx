@@ -4,12 +4,14 @@ import * as THREE from 'three';
 
 const ThreeScene: React.FC = () => {
   const mountRef = useRef<HTMLDivElement | null>(null);
+  
 
   useEffect(() => {
     if (!mountRef.current) return;
 
     // Scene setup
     const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x000224);
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     
@@ -26,7 +28,7 @@ const ThreeScene: React.FC = () => {
     }
 
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    const material = new THREE.PointsMaterial({ color: 0xFFFFFF, size: 0.5 });
+    const material = new THREE.PointsMaterial({ color: 0xa7afc7, size: 0.5 });
     const particles = new THREE.Points(geometry, material);
 
     scene.add(particles);
