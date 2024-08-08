@@ -17,20 +17,22 @@ const WaitlistForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col md:flex-row items-center mt-8 w-full max-w-lg">
-      <input
-        type="email"
-        placeholder="Enter your email address"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        className="border p-2 rounded-l-md w-full mb-2 md:mb-0 md:flex-1"
-        required
-      />
-      <button type="submit" className="bg-white text-black p-2 rounded-r-md w-full md:w-auto md:px-4">
-        Join Waitlist
-      </button>
-      {message && <p className="text-center mt-4 text-red-500">{message}</p>}
-    </form>
+    <div className=" gap-5 mt-8  ">
+      <form onSubmit={handleSubmit} className="flex flex-col md:flex-row md:gap-4 items-center w-full">
+        <input
+          type="email"
+          placeholder="Enter your email address"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="bg-blue-900 p-2 px-2 rounded-l-md md:w-96 mb-2 md:mb-0 "
+          required
+        />
+        <button type="submit" className="bg-blue-900 text-white p-2 rounded-r-md md:flex-1 w-full md:px-2">
+          Join Waitlist
+        </button>
+      </form>
+      {message && <p className="text-center mt-4 text-white">{message}</p>}
+    </div>
   );
 };
 

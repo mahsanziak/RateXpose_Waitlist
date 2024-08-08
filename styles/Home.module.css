@@ -1,0 +1,13 @@
+/* styles.css or in a global CSS file */
+.hidden-content {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+  
+.show {
+    opacity: 1;
+}
+
+.bottom-spacing {
+    margin-bottom: 50px; /* Adjust the value as needed */
+  }
