@@ -1,4 +1,18 @@
 /* styles.css or in a global CSS file */
+.thicker-text {
+    font-weight: 600; /* You can adjust the value, e.g., 600 or 700 for a thicker font */
+}
+
+.error-message {
+    color: red;
+    font-weight: 600; /* Adjust for a slightly thicker font */
+}
+
+.success-message {
+    color: green;
+    font-weight: 600; /* Make the success message green and thicker */
+}
+
 .hidden-content {
     opacity: 0;
     transition: opacity 1s ease-in-out;
@@ -10,4 +24,4 @@
 
 .bottom-spacing {
     margin-bottom: 50px; /* Adjust the value as needed */
-  }
+}

@@ -50,7 +50,7 @@ const Home: NextPage = () => {
       <ThreeScene />
       <main className={`relative z-10 flex flex-col items-center mt-16 text-center max-w-6xl w-full ${styles['bottom-spacing']}`}>
         <h1 className="text-4xl md:text-6xl font-bold leading-tight text-white">Discover the true cost of essential services</h1>
-        <p className="mt-10 text-lg md:text-xl max-w-2xl text-gray-300">
+        <p className={`mt-10 text-lg md:text-xl max-w-2xl text-gray-300 ${styles['thicker-text']}`}>
           Post, collect and discover bills info anonymously. Join the waitlist to get early access.
         </p>
         <WaitlistForm />
@@ -60,21 +60,21 @@ const Home: NextPage = () => {
             <div className="p-4 flex flex-col items-center">
               <Image src="/upload-bill.jpg" alt="Upload Bill" width={300} height={300} />
               <h3 className="text-2xl font-semibold text-white mt-4">Upload Bills Anonymously</h3>
-              <p className="text-gray-300 mt-2 text-center">
+              <p className={`text-gray-300 mt-2 text-center ${styles['thicker-text']}`}>
                 Securely upload your bills without revealing your identity.
               </p>
             </div>
             <div className="p-4 flex flex-col items-center">
               <Image src="/view-bills.jpg" alt="View Bills" width={300} height={300} />
               <h3 className="text-2xl font-semibold text-white mt-4">View Bills from Others</h3>
-              <p className="text-gray-300 mt-2 text-center">
+              <p className={`text-gray-300 mt-2 text-center ${styles['thicker-text']}`}>
                 Access bills uploaded by other users to compare costs.
               </p>
             </div>
             <div className="p-4 flex flex-col items-center">
               <Image src="/request-quote.jpg" alt="Request Quote" width={300} height={300} />
               <h3 className="text-2xl font-semibold text-white mt-4">Request Quotes</h3>
-              <p className="text-gray-300 mt-2 text-center">
+              <p className={`text-gray-300 mt-2 text-center ${styles['thicker-text']}`}>
                 Get quotes for similar bills and find better deals.
               </p>
             </div>
