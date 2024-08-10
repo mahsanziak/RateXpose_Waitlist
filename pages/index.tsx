@@ -2,12 +2,31 @@ import { useEffect, useRef } from 'react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
+import { FaShieldAlt, FaEye, FaFileInvoiceDollar } from 'react-icons/fa';
 import WaitlistForm from '../components/WaitlistForm';
-import ThreeScene from '../components/ThreeScene';
+import ThreeScene from '../components/ThreeScene'; // Ensure this component exists or remove if not needed
 import styles from '../styles/Home.module.css';
 
+const steps = [
+  {
+    title: 'Upload Bills Anonymously',
+    description: 'Securely upload your bills without revealing your identity.',
+    icon: <FaShieldAlt size={100} color="#4A5568" />, // Slate-700
+  },
+  {
+    title: 'View Bills from Others',
+    description: 'Access bills uploaded by other users to compare costs.',
+    icon: <FaEye size={100} color="#4A5568" />, // Slate-700
+  },
+  {
+    title: 'Request Quotes',
+    description: 'Get quotes for similar bills and find better deals.',
+    icon: <FaFileInvoiceDollar size={100} color="#4A5568" />, // Slate-700
+  },
+];
+
 const Home: NextPage = () => {
-  const contentRef = useRef<HTMLDivElement>(null);
+  const contentRefs = useRef<HTMLDivElement[]>([]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -23,27 +42,31 @@ const Home: NextPage = () => {
       }
     );
 
-    if (contentRef.current) {
-      observer.observe(contentRef.current);
-    }
+    contentRefs.current.forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
 
     return () => {
-      if (contentRef.current) {
-        observer.unobserve(contentRef.current);
-      }
+      contentRefs.current.forEach((ref) => {
+        if (ref) observer.unobserve(ref);
+      });
     };
   }, []);
 
   return (
     <div className="text-slate-300 min-h-screen flex flex-col items-center px-4">
       <Head>
-        <title>Waitlist for RateXpose</title>
+        <title>RateXpose</title>
         <meta name="description" content="Join the waitlist for RateXpose" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/logo.svg" type="image/svg+xml" />
+        <link rel="icon" href="/favicon-32x32.png" sizes="32x32" />
+        <link rel="icon" href="/favicon-64x64.png" sizes="64x64" />
+        <link rel="icon" href="/favicon-128x128.png" sizes="128x128" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
       </Head>
       <header className="relative z-10 flex justify-between items-center w-full p-4 max-w-6xl">
         <div className="flex items-center">
-          <Image src="/logo.png" alt="RateXpose Logo" width={50} height={50} className="w-12 h-12 md:w-20 md:h-20" />
+          <Image src="/logo.svg" alt="RateXpose Logo" width={50} height={50} className="w-12 h-12 md:w-20 md:h-20" />
           <span className="ml-2 text-xl md:text-2xl font-bold text-white">RateXpose</span>
         </div>
       </header>
@@ -56,29 +79,25 @@ const Home: NextPage = () => {
         <WaitlistForm />
         <section className="mt-20 max-w-6xl text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white">How RateXpose Works</h2>
-          <div ref={contentRef} className="mt-8 flex flex-col md:flex-row items-center justify-around hidden-content">
-            <div className="p-4 flex flex-col items-center">
-              <Image src="/upload-bill.jpg" alt="Upload Bill" width={300} height={300} />
-              <h3 className="text-2xl font-semibold text-white mt-4">Upload Bills Anonymously</h3>
+          {steps.map((step, index) => (
+            <div
+              key={index}
+              ref={(el) => {
+                if (el) {
+                  contentRefs.current[index] = el;
+                }
+              }}
+              className="mt-16 flex flex-col items-center hidden-content"
+            >
+              <div className="icon-container">
+                {step.icon}
+              </div>
+              <h3 className="text-2xl font-semibold text-white mt-4">{step.title}</h3>
               <p className={`text-gray-300 mt-2 text-center ${styles['thicker-text']}`}>
-                Securely upload your bills without revealing your identity.
+                {step.description}
               </p>
             </div>
-            <div className="p-4 flex flex-col items-center">
-              <Image src="/view-bills.jpg" alt="View Bills" width={300} height={300} />
-              <h3 className="text-2xl font-semibold text-white mt-4">View Bills from Others</h3>
-              <p className={`text-gray-300 mt-2 text-center ${styles['thicker-text']}`}>
-                Access bills uploaded by other users to compare costs.
-              </p>
-            </div>
-            <div className="p-4 flex flex-col items-center">
-              <Image src="/request-quote.jpg" alt="Request Quote" width={300} height={300} />
-              <h3 className="text-2xl font-semibold text-white mt-4">Request Quotes</h3>
-              <p className={`text-gray-300 mt-2 text-center ${styles['thicker-text']}`}>
-                Get quotes for similar bills and find better deals.
-              </p>
-            </div>
-          </div>
+          ))}
         </section>
       </main>
     </div>
